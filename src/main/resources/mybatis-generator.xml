@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+	<context id="DB2Tables" targetRuntime="MyBatis3" >
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<commentGenerator >
+			<!-- 指定生成的java文件的编码,没有直接生成到项目时中文可能会乱码 -->
+			<property name="javaFileEncoding" value="UTF-8" />
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!--数据库链接地址账号密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/oa" userId="root"
+			password="123456">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!--生成Model类存放位置 -->
+		<javaModelGenerator targetPackage="com.curou.oa.models"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!--生成映射文件存放位置 -->
+		<sqlMapGenerator targetPackage="com.curou.oa.models"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!--生成Dao类存放位置 -->
+		<!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码 type="ANNOTATEDMAPPER",生成Java Model 
+			和基于注解的Mapper对象 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象 type="XMLMAPPER",生成SQLMap 
+			XML文件和独立的Mapper接口 -->
+		<javaClientGenerator type="ANNOTATEDMAPPER"
+			targetPackage="com.curou.oa.dao" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!--生成对应表及类名 -->
+        <!--<table tableName="product" domainObjectName="Product"></table>-->
+        <!--<table tableName="user" domainObjectName="User"></table>-->
+		<table tableName="menu" domainObjectName="Menu"></table>
+		<!--<table tableName="specification_detail" domainObjectName="SpecificationDetail"></table>-->
+		<!--<table tableName="specification" domainObjectName="Specification"></table>-->
+		<table tableName="permission" domainObjectName="Permission"></table>
+		<!--<table tableName="user_roles" domainObjectName="UserRoles"></table>-->
+		<!--<table tableName="reimburse" domainObjectName="Reimburse"></table>-->
+		<!--<table tableName="product_stock" domainObjectName="ProductStock"></table>-->
+		<!--<table tableName="stock_order_detail" domainObjectName="StockOrderDetail"></table>-->
+		<!--<table tableName="stock_order" domainObjectName="StockOrder"></table>-->
+		<!--<table tableName="product_unit" domainObjectName="ProductUnit"></table>-->
+
+		<!--<table tableName="roles_permissions" domainObjectName="RolesPermissions"></table>-->
+		<!--<table tableName="department" domainObjectName="Department"></table>-->
+		<table tableName="role" domainObjectName="Role"></table>
+		<!--<table tableName="company_info" domainObjectName="CompanyInfo"></table>-->
+		<!--<table tableName="upload_user" domainObjectName="UploadUser"></table>-->
+		<!--<table tableName="upload_detail" domainObjectName="UploadDetail"></table>-->
+
+		<table tableName="lm_registration_code" domainObjectName="LmRegistrationCode"></table>
+		<table tableName="lm_card" domainObjectName="LmCard"></table>
+		<table tableName="lm_project" domainObjectName="LmProject"></table>
+
+
+
+
+    </context>
+</generatorConfiguration>

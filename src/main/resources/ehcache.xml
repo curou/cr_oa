@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false">
+    <defaultCache
+            eternal="false"
+            maxElementsInMemory="1000"
+            overflowToDisk="false"
+            diskPersistent="false"
+            timeToIdleSeconds="0"
+            timeToLiveSeconds="600"
+            memoryStoreEvictionPolicy="LRU" />
+
+<!--    &lt;!&ndash;  fileIcon&ndash;&gt;
+    <cache
+            name="fileIcon"
+            eternal="false"
+            maxElementsInMemory="1000"
+            overflowToDisk="false"
+            diskPersistent="false"
+            timeToIdleSeconds="0"
+            timeToLiveSeconds="0"
+            memoryStoreEvictionPolicy="LRU" />
+            
+	&lt;!&ndash;  fileModel&ndash;&gt;
+    <cache
+            name="fileModel"
+            eternal="false"
+            maxElementsInMemory="100"
+            overflowToDisk="false"
+            diskPersistent="false"
+            timeToIdleSeconds="0"
+            timeToLiveSeconds="0"
+            memoryStoreEvictionPolicy="LRU" />
+    &lt;!&ndash;  fileSum&ndash;&gt;
+    <cache
+            name="fileSum"
+            eternal="false"
+            maxElementsInMemory="1000"
+            overflowToDisk="false"
+            diskPersistent="false"
+            timeToIdleSeconds="0"
+            timeToLiveSeconds="0"
+            memoryStoreEvictionPolicy="LRU" />
+    &lt;!&ndash;  fileSize&ndash;&gt;
+    <cache
+            name="fileSize"
+            eternal="false"
+            maxElementsInMemory="1000"
+            overflowToDisk="false"
+            diskPersistent="false"
+            timeToIdleSeconds="0"
+            timeToLiveSeconds="0"
+            memoryStoreEvictionPolicy="LRU" />-->
+</ehcache>
