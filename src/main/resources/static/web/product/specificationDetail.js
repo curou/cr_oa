@@ -104,7 +104,7 @@ layui.use(['table', 'form', 'jquery', 'element', 'laydate'], function () {
             , limit: 10
             , limits: [10, 20, 30]
             , cols: [[ //表头
-                {type: 'checkbox'}
+                {type: 'checkbox',width: 50}
                 , {field: 'value', align: 'center', title: '规格值名称', width: 130, edit: 'text'}
                 , {field: 'createTimeUtc', align: 'center', title: '创建时间', width: 300}
             ]]

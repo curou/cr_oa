@@ -33,7 +33,7 @@ layui.use(['table', 'form', 'jquery', 'element', 'laydate'], function () {
             , limit: 10
             , limits: [10, 20, 30]
             , cols: [[ //表头
-                {type: 'checkbox'}
+                {type: 'checkbox',width: 50}
                 , {field: 'productName', align: 'center', title: '产品名称', width: 130, edit: 'text'}
                 , {field: 'productNumber', align: 'center', title: '产品编号', width: 130, edit: 'text'}
                 , {field: 'productUnits', align: 'center', title: '产品单位', width: 130, edit: 'text'}

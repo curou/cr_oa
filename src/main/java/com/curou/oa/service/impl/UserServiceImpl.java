@@ -196,7 +196,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<String> getPermsByUserAccount(String account){
-        return mapper.getPermsByUserAccount(account);
+    public List<String> getPermsFlagByUserAccount(String account){
+        return mapper.getPermsFlagByUserAccount(account);
+    }
+
+    @Override
+    public List<String> getPermsIdByUserAccount(String account) {
+        return mapper.getPermsIdByUserAccount(account);
     }
 }

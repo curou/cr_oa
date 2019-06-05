@@ -60,6 +60,7 @@
 //     });
 // })
 
+
 //初始化全局
 layui.use(['table', 'form', 'jquery', 'element'], function () {
     var table = layui.table
@@ -98,8 +99,12 @@ layui.use(['table', 'form', 'jquery', 'element'], function () {
         $(".layui-side-menu").animate({width: $(".layui-side-menu").width() - 200 + "px"}, animateSpeed);
         //正文伸缩
         $(".layui-body").animate({left: $(".layui-body").position().left - 200 + "px"}, animateSpeed, null, function () {
-            $("#logoStatus").val($("#logo").html());
-            $("#logo").html("");
+            // $("#logoStatus").val($("#logo").html());
+            // $("#logo").html("");
+            $("#logo").css("text-align", "center");
+            $("#companyName").css("display", "none");
+            $("#osName").css("display", "");
+
         });
     }
     if (windowWidth > windowWidthCriterion) {
@@ -218,8 +223,8 @@ layui.use(['table', 'form', 'jquery', 'element'], function () {
             $(".layui-layout-left").animate({left: $(".layui-layout-left").position().left + 140 + "px"}, animateSpeed);
         } else {
             //展开状态点击操作
-            var url = $(this).attr("url");
-            if (url != "main") {
+            var path = $(this).attr("path");
+            if (path != "main") {
                 loadMainBody($(this).attr("path"));
                 if (flexStatus == 0) {
                     menuButtonChange("show");
@@ -296,6 +301,11 @@ layui.use(['table', 'form', 'jquery', 'element'], function () {
         }
     });
 
+    layui.config({
+        base: '/js/'
+    }).extend({
+        curou:'curou',
+    })
 
     var loadMainBody = function (path) {
         var html = "";

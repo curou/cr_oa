@@ -60,7 +60,7 @@ public final class ListUtils {
 	 * 根据List中的对象的某个属性的值归类，将List拆分成多个List，再放入一个总的List
 	 *
 	 */
-	public static<T> List<List<T>> get(String filed, List<T> list){
+	public static<T> List<List<T>> splitToMultipleListByFiled(String filed, List<T> list){
 		List<List<T>> resultList = new ArrayList<>();
 		Map<String, List<T>> map = new LinkedHashMap<>();
 		List<String> keyList = new ArrayList<>();

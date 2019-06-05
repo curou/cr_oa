@@ -23,6 +23,6 @@ public interface PermissionService {
 
     Boolean checkName(Permission permission);
 
-//    Boolean checkFlag(Permission permission);
+    Boolean checkFlag(Permission permission);
 
 }

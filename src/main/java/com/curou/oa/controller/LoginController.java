@@ -5,6 +5,7 @@ import com.curou.oa.models.Menu;
 import com.curou.oa.models.ProductUnit;
 import com.curou.oa.models.Stock;
 import com.curou.oa.models.User;
+import com.curou.oa.models.extend.MenuExtend;
 import com.curou.oa.service.LoginService;
 import com.curou.oa.service.ProductUnitService;
 import com.curou.oa.service.StockService;
@@ -72,11 +73,11 @@ public class LoginController {
     public String index(ModelMap modelMap){
         User user = (User)SecurityUtils.getSubject().getSession().getAttribute("user");
         SearchBase searchBase = new SearchBase();
-        List<List<Menu>> lists = menuController.initMenu();
+        List<MenuExtend> menus = menuController.menuIncludeChildren();
         List<Stock> stocks = stockService.getAllStock();
         List<ProductUnit> units = productUnitService.getAll(searchBase);
         modelMap.addAttribute("stocks",stocks);
-        modelMap.addAttribute("lists", lists);
+        modelMap.addAttribute("menus", menus);
         modelMap.addAttribute("userInfo",user);
         modelMap.addAttribute("units",units);
         return "/index";

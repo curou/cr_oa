@@ -29,7 +29,10 @@ public interface UserExtendMapper extends UserMapper {
     })
     List<UserDataRes> list(UserSearch search);
 
-    @SelectProvider(type=UserExtendSqlProvider.class, method="getPermsByUserAccount")
-    List<String> getPermsByUserAccount(String accout);
+    @SelectProvider(type=UserExtendSqlProvider.class, method="getPermsFlagByUserAccount")
+    List<String> getPermsFlagByUserAccount(String accout);
+
+    @SelectProvider(type=UserExtendSqlProvider.class, method="getPermsIdByUserAccount")
+    List<String> getPermsIdByUserAccount(String accout);
 
 }

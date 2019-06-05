@@ -185,52 +185,62 @@ public class LmRegistrationCodeExample {
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeEqualTo(Integer value) {
+        public Criteria andCardTypeEqualTo(String value) {
             addCriterion("card_type =", value, "cardType");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeNotEqualTo(Integer value) {
+        public Criteria andCardTypeNotEqualTo(String value) {
             addCriterion("card_type <>", value, "cardType");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeGreaterThan(Integer value) {
+        public Criteria andCardTypeGreaterThan(String value) {
             addCriterion("card_type >", value, "cardType");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andCardTypeGreaterThanOrEqualTo(String value) {
             addCriterion("card_type >=", value, "cardType");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeLessThan(Integer value) {
+        public Criteria andCardTypeLessThan(String value) {
             addCriterion("card_type <", value, "cardType");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeLessThanOrEqualTo(Integer value) {
+        public Criteria andCardTypeLessThanOrEqualTo(String value) {
             addCriterion("card_type <=", value, "cardType");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeIn(List<Integer> values) {
+        public Criteria andCardTypeLike(String value) {
+            addCriterion("card_type like", value, "cardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardTypeNotLike(String value) {
+            addCriterion("card_type not like", value, "cardType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardTypeIn(List<String> values) {
             addCriterion("card_type in", values, "cardType");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeNotIn(List<Integer> values) {
+        public Criteria andCardTypeNotIn(List<String> values) {
             addCriterion("card_type not in", values, "cardType");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeBetween(Integer value1, Integer value2) {
+        public Criteria andCardTypeBetween(String value1, String value2) {
             addCriterion("card_type between", value1, value2, "cardType");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeNotBetween(Integer value1, Integer value2) {
+        public Criteria andCardTypeNotBetween(String value1, String value2) {
             addCriterion("card_type not between", value1, value2, "cardType");
             return (Criteria) this;
         }
@@ -505,52 +515,62 @@ public class LmRegistrationCodeExample {
             return (Criteria) this;
         }
 
-        public Criteria andProTypeEqualTo(Integer value) {
+        public Criteria andProTypeEqualTo(String value) {
             addCriterion("pro_type =", value, "proType");
             return (Criteria) this;
         }
 
-        public Criteria andProTypeNotEqualTo(Integer value) {
+        public Criteria andProTypeNotEqualTo(String value) {
             addCriterion("pro_type <>", value, "proType");
             return (Criteria) this;
         }
 
-        public Criteria andProTypeGreaterThan(Integer value) {
+        public Criteria andProTypeGreaterThan(String value) {
             addCriterion("pro_type >", value, "proType");
             return (Criteria) this;
         }
 
-        public Criteria andProTypeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andProTypeGreaterThanOrEqualTo(String value) {
             addCriterion("pro_type >=", value, "proType");
             return (Criteria) this;
         }
 
-        public Criteria andProTypeLessThan(Integer value) {
+        public Criteria andProTypeLessThan(String value) {
             addCriterion("pro_type <", value, "proType");
             return (Criteria) this;
         }
 
-        public Criteria andProTypeLessThanOrEqualTo(Integer value) {
+        public Criteria andProTypeLessThanOrEqualTo(String value) {
             addCriterion("pro_type <=", value, "proType");
             return (Criteria) this;
         }
 
-        public Criteria andProTypeIn(List<Integer> values) {
+        public Criteria andProTypeLike(String value) {
+            addCriterion("pro_type like", value, "proType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProTypeNotLike(String value) {
+            addCriterion("pro_type not like", value, "proType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProTypeIn(List<String> values) {
             addCriterion("pro_type in", values, "proType");
             return (Criteria) this;
         }
 
-        public Criteria andProTypeNotIn(List<Integer> values) {
+        public Criteria andProTypeNotIn(List<String> values) {
             addCriterion("pro_type not in", values, "proType");
             return (Criteria) this;
         }
 
-        public Criteria andProTypeBetween(Integer value1, Integer value2) {
+        public Criteria andProTypeBetween(String value1, String value2) {
             addCriterion("pro_type between", value1, value2, "proType");
             return (Criteria) this;
         }
 
-        public Criteria andProTypeNotBetween(Integer value1, Integer value2) {
+        public Criteria andProTypeNotBetween(String value1, String value2) {
             addCriterion("pro_type not between", value1, value2, "proType");
             return (Criteria) this;
         }
@@ -565,53 +585,113 @@ public class LmRegistrationCodeExample {
             return (Criteria) this;
         }
 
-        public Criteria andActivationTimeEqualTo(Integer value) {
+        public Criteria andActivationTimeEqualTo(Date value) {
             addCriterion("activation_time =", value, "activationTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivationTimeNotEqualTo(Integer value) {
+        public Criteria andActivationTimeNotEqualTo(Date value) {
             addCriterion("activation_time <>", value, "activationTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivationTimeGreaterThan(Integer value) {
+        public Criteria andActivationTimeGreaterThan(Date value) {
             addCriterion("activation_time >", value, "activationTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivationTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andActivationTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("activation_time >=", value, "activationTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivationTimeLessThan(Integer value) {
+        public Criteria andActivationTimeLessThan(Date value) {
             addCriterion("activation_time <", value, "activationTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivationTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andActivationTimeLessThanOrEqualTo(Date value) {
             addCriterion("activation_time <=", value, "activationTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivationTimeIn(List<Integer> values) {
+        public Criteria andActivationTimeIn(List<Date> values) {
             addCriterion("activation_time in", values, "activationTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivationTimeNotIn(List<Integer> values) {
+        public Criteria andActivationTimeNotIn(List<Date> values) {
             addCriterion("activation_time not in", values, "activationTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivationTimeBetween(Integer value1, Integer value2) {
+        public Criteria andActivationTimeBetween(Date value1, Date value2) {
             addCriterion("activation_time between", value1, value2, "activationTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivationTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andActivationTimeNotBetween(Date value1, Date value2) {
             addCriterion("activation_time not between", value1, value2, "activationTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindStatusIsNull() {
+            addCriterion("bind_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindStatusIsNotNull() {
+            addCriterion("bind_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindStatusEqualTo(Integer value) {
+            addCriterion("bind_status =", value, "bindStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindStatusNotEqualTo(Integer value) {
+            addCriterion("bind_status <>", value, "bindStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindStatusGreaterThan(Integer value) {
+            addCriterion("bind_status >", value, "bindStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("bind_status >=", value, "bindStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindStatusLessThan(Integer value) {
+            addCriterion("bind_status <", value, "bindStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("bind_status <=", value, "bindStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindStatusIn(List<Integer> values) {
+            addCriterion("bind_status in", values, "bindStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindStatusNotIn(List<Integer> values) {
+            addCriterion("bind_status not in", values, "bindStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindStatusBetween(Integer value1, Integer value2) {
+            addCriterion("bind_status between", value1, value2, "bindStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("bind_status not between", value1, value2, "bindStatus");
             return (Criteria) this;
         }
 
@@ -805,123 +885,63 @@ public class LmRegistrationCodeExample {
             return (Criteria) this;
         }
 
-        public Criteria andOnlineStatusIsNull() {
-            addCriterion("online_status is null");
+        public Criteria andFreezeStatusIsNull() {
+            addCriterion("freeze_status is null");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineStatusIsNotNull() {
-            addCriterion("online_status is not null");
+        public Criteria andFreezeStatusIsNotNull() {
+            addCriterion("freeze_status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineStatusEqualTo(Integer value) {
-            addCriterion("online_status =", value, "onlineStatus");
+        public Criteria andFreezeStatusEqualTo(Integer value) {
+            addCriterion("freeze_status =", value, "freezeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineStatusNotEqualTo(Integer value) {
-            addCriterion("online_status <>", value, "onlineStatus");
+        public Criteria andFreezeStatusNotEqualTo(Integer value) {
+            addCriterion("freeze_status <>", value, "freezeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineStatusGreaterThan(Integer value) {
-            addCriterion("online_status >", value, "onlineStatus");
+        public Criteria andFreezeStatusGreaterThan(Integer value) {
+            addCriterion("freeze_status >", value, "freezeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("online_status >=", value, "onlineStatus");
+        public Criteria andFreezeStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("freeze_status >=", value, "freezeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineStatusLessThan(Integer value) {
-            addCriterion("online_status <", value, "onlineStatus");
+        public Criteria andFreezeStatusLessThan(Integer value) {
+            addCriterion("freeze_status <", value, "freezeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("online_status <=", value, "onlineStatus");
+        public Criteria andFreezeStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("freeze_status <=", value, "freezeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineStatusIn(List<Integer> values) {
-            addCriterion("online_status in", values, "onlineStatus");
+        public Criteria andFreezeStatusIn(List<Integer> values) {
+            addCriterion("freeze_status in", values, "freezeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineStatusNotIn(List<Integer> values) {
-            addCriterion("online_status not in", values, "onlineStatus");
+        public Criteria andFreezeStatusNotIn(List<Integer> values) {
+            addCriterion("freeze_status not in", values, "freezeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineStatusBetween(Integer value1, Integer value2) {
-            addCriterion("online_status between", value1, value2, "onlineStatus");
+        public Criteria andFreezeStatusBetween(Integer value1, Integer value2) {
+            addCriterion("freeze_status between", value1, value2, "freezeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("online_status not between", value1, value2, "onlineStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCountIsNull() {
-            addCriterion("count is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCountIsNotNull() {
-            addCriterion("count is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCountEqualTo(Integer value) {
-            addCriterion("count =", value, "count");
-            return (Criteria) this;
-        }
-
-        public Criteria andCountNotEqualTo(Integer value) {
-            addCriterion("count <>", value, "count");
-            return (Criteria) this;
-        }
-
-        public Criteria andCountGreaterThan(Integer value) {
-            addCriterion("count >", value, "count");
-            return (Criteria) this;
-        }
-
-        public Criteria andCountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("count >=", value, "count");
-            return (Criteria) this;
-        }
-
-        public Criteria andCountLessThan(Integer value) {
-            addCriterion("count <", value, "count");
-            return (Criteria) this;
-        }
-
-        public Criteria andCountLessThanOrEqualTo(Integer value) {
-            addCriterion("count <=", value, "count");
-            return (Criteria) this;
-        }
-
-        public Criteria andCountIn(List<Integer> values) {
-            addCriterion("count in", values, "count");
-            return (Criteria) this;
-        }
-
-        public Criteria andCountNotIn(List<Integer> values) {
-            addCriterion("count not in", values, "count");
-            return (Criteria) this;
-        }
-
-        public Criteria andCountBetween(Integer value1, Integer value2) {
-            addCriterion("count between", value1, value2, "count");
-            return (Criteria) this;
-        }
-
-        public Criteria andCountNotBetween(Integer value1, Integer value2) {
-            addCriterion("count not between", value1, value2, "count");
+        public Criteria andFreezeStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("freeze_status not between", value1, value2, "freezeStatus");
             return (Criteria) this;
         }
     }

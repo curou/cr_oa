@@ -62,6 +62,10 @@ public class PermissionController {
         if (!result){
             throw new AjaxException("该权限已存在");
         }
+        result = service.checkFlag(permission);
+        if (!result){
+            throw new AjaxException("该权限标志已存在");
+        }
         if (StringUtils.isBlank(permission.getId())) {
             service.add(permission);
         }else {

@@ -18,6 +18,13 @@
                        class="layui-input">
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限标志</label>
+            <div class="layui-input-inline">
+                <input type="text" name="flag" id="flag" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
 
 
 
@@ -40,7 +47,7 @@
             , element = layui.element;
 
         $("#name").val(parent.layui.$("#editName").val());
-        // $("#flag").val(parent.layui.$("#editFlag").val());
+         $("#flag").val(parent.layui.$("#editFlag").val());
         $("#editId").val(parent.layui.$("#editId").val());
         //监听搜索按钮
         form.on('submit(demo1)', function (data) {

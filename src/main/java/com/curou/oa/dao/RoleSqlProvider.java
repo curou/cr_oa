@@ -36,6 +36,10 @@ public class RoleSqlProvider {
             sql.VALUES("name", "#{name,jdbcType=VARCHAR}");
         }
         
+        if (record.getCode() != null) {
+            sql.VALUES("code", "#{code,jdbcType=VARCHAR}");
+        }
+        
         if (record.getCreateTimeUtc() != null) {
             sql.VALUES("create_time_utc", "#{createTimeUtc,jdbcType=TIMESTAMP}");
         }
@@ -55,6 +59,7 @@ public class RoleSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("name");
+        sql.SELECT("code");
         sql.SELECT("create_time_utc");
         sql.SELECT("modify_time_utc");
         sql.FROM("role");
@@ -82,6 +87,10 @@ public class RoleSqlProvider {
             sql.SET("name = #{record.name,jdbcType=VARCHAR}");
         }
         
+        if (record.getCode() != null) {
+            sql.SET("code = #{record.code,jdbcType=VARCHAR}");
+        }
+        
         if (record.getCreateTimeUtc() != null) {
             sql.SET("create_time_utc = #{record.createTimeUtc,jdbcType=TIMESTAMP}");
         }
@@ -100,6 +109,7 @@ public class RoleSqlProvider {
         
         sql.SET("id = #{record.id,jdbcType=VARCHAR}");
         sql.SET("name = #{record.name,jdbcType=VARCHAR}");
+        sql.SET("code = #{record.code,jdbcType=VARCHAR}");
         sql.SET("create_time_utc = #{record.createTimeUtc,jdbcType=TIMESTAMP}");
         sql.SET("modify_time_utc = #{record.modifyTimeUtc,jdbcType=TIMESTAMP}");
         
@@ -114,6 +124,10 @@ public class RoleSqlProvider {
         
         if (record.getName() != null) {
             sql.SET("name = #{name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getCode() != null) {
+            sql.SET("code = #{code,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTimeUtc() != null) {

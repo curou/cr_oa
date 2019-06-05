@@ -15,7 +15,8 @@ layui.use(['table', 'form', 'jquery', 'element'], function () {
         , limit: 10//默认每页显示数量
         , limits: [10, 20, 30]//每页显示数量类型
         , cols: [[
-            {type: 'checkbox'}
+            {type: 'checkbox',width: 50}
+            , {field: 'flag', title: '权限标志', width: 150, align: 'center'}
             , {field: 'name', title: '权限', width: 100, align: 'center'}
             , {field: 'createTimeUtc', title: '创建时间', align: 'center', width: 180, sort: true}
         ]]
@@ -63,10 +64,11 @@ layui.use(['table', 'form', 'jquery', 'element'], function () {
     var openUpdatePerm = function (json) {
         $("#editName").val(json[0].name);
         $("#editId").val(json[0].id);
+        $("#editFlag").val(json[0].flag);
         layer.open({
             title: ['编辑权限', 'font-size:18px;']
             , shade: 0.6 //遮罩透明度
-            , area: ['350px', '170px']//宽度
+            , area: ['350px', '220px']//宽度
             , type: 2
             , anim: 1 //0-6的动画形式，-1不开启
             , content: 'jump?url=user/editPerm'
@@ -122,7 +124,7 @@ layui.use(['table', 'form', 'jquery', 'element'], function () {
         layer.open({
             title: ['添加权限', 'font-size:18px;']
             , shade: 0.6 //遮罩透明度
-            , area: ['350px', '170px']//宽度
+            , area: ['350px', '220px']//宽度
             , type: 2
             , anim: 1 //0-6的动画形式，-1不开启
             , content: 'jump?url=user/addPerm'

@@ -33,7 +33,7 @@ public class LmRegistrationCodeSqlProvider {
         }
         
         if (record.getCardType() != null) {
-            sql.VALUES("card_type", "#{cardType,jdbcType=INTEGER}");
+            sql.VALUES("card_type", "#{cardType,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -53,11 +53,15 @@ public class LmRegistrationCodeSqlProvider {
         }
         
         if (record.getProType() != null) {
-            sql.VALUES("pro_type", "#{proType,jdbcType=INTEGER}");
+            sql.VALUES("pro_type", "#{proType,jdbcType=VARCHAR}");
         }
         
         if (record.getActivationTime() != null) {
-            sql.VALUES("activation_time", "#{activationTime,jdbcType=INTEGER}");
+            sql.VALUES("activation_time", "#{activationTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getBindStatus() != null) {
+            sql.VALUES("bind_status", "#{bindStatus,jdbcType=INTEGER}");
         }
         
         if (record.getDeviceNo() != null) {
@@ -72,12 +76,8 @@ public class LmRegistrationCodeSqlProvider {
             sql.VALUES("modify_time_utc", "#{modifyTimeUtc,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getOnlineStatus() != null) {
-            sql.VALUES("online_status", "#{onlineStatus,jdbcType=INTEGER}");
-        }
-        
-        if (record.getCount() != null) {
-            sql.VALUES("count", "#{count,jdbcType=INTEGER}");
+        if (record.getFreezeStatus() != null) {
+            sql.VALUES("freeze_status", "#{freezeStatus,jdbcType=INTEGER}");
         }
         
         return sql.toString();
@@ -97,11 +97,11 @@ public class LmRegistrationCodeSqlProvider {
         sql.SELECT("code");
         sql.SELECT("pro_type");
         sql.SELECT("activation_time");
+        sql.SELECT("bind_status");
         sql.SELECT("device_no");
         sql.SELECT("create_time_utc");
         sql.SELECT("modify_time_utc");
-        sql.SELECT("online_status");
-        sql.SELECT("count");
+        sql.SELECT("freeze_status");
         sql.FROM("lm_registration_code");
         applyWhere(sql, example, false);
         
@@ -124,7 +124,7 @@ public class LmRegistrationCodeSqlProvider {
         }
         
         if (record.getCardType() != null) {
-            sql.SET("card_type = #{record.cardType,jdbcType=INTEGER}");
+            sql.SET("card_type = #{record.cardType,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -144,11 +144,15 @@ public class LmRegistrationCodeSqlProvider {
         }
         
         if (record.getProType() != null) {
-            sql.SET("pro_type = #{record.proType,jdbcType=INTEGER}");
+            sql.SET("pro_type = #{record.proType,jdbcType=VARCHAR}");
         }
         
         if (record.getActivationTime() != null) {
-            sql.SET("activation_time = #{record.activationTime,jdbcType=INTEGER}");
+            sql.SET("activation_time = #{record.activationTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getBindStatus() != null) {
+            sql.SET("bind_status = #{record.bindStatus,jdbcType=INTEGER}");
         }
         
         if (record.getDeviceNo() != null) {
@@ -163,12 +167,8 @@ public class LmRegistrationCodeSqlProvider {
             sql.SET("modify_time_utc = #{record.modifyTimeUtc,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getOnlineStatus() != null) {
-            sql.SET("online_status = #{record.onlineStatus,jdbcType=INTEGER}");
-        }
-        
-        if (record.getCount() != null) {
-            sql.SET("count = #{record.count,jdbcType=INTEGER}");
+        if (record.getFreezeStatus() != null) {
+            sql.SET("freeze_status = #{record.freezeStatus,jdbcType=INTEGER}");
         }
         
         applyWhere(sql, example, true);
@@ -180,18 +180,18 @@ public class LmRegistrationCodeSqlProvider {
         sql.UPDATE("lm_registration_code");
         
         sql.SET("id = #{record.id,jdbcType=VARCHAR}");
-        sql.SET("card_type = #{record.cardType,jdbcType=INTEGER}");
+        sql.SET("card_type = #{record.cardType,jdbcType=VARCHAR}");
         sql.SET("status = #{record.status,jdbcType=INTEGER}");
         sql.SET("expiration_time = #{record.expirationTime,jdbcType=TIMESTAMP}");
         sql.SET("remark = #{record.remark,jdbcType=VARCHAR}");
         sql.SET("code = #{record.code,jdbcType=VARCHAR}");
-        sql.SET("pro_type = #{record.proType,jdbcType=INTEGER}");
-        sql.SET("activation_time = #{record.activationTime,jdbcType=INTEGER}");
+        sql.SET("pro_type = #{record.proType,jdbcType=VARCHAR}");
+        sql.SET("activation_time = #{record.activationTime,jdbcType=TIMESTAMP}");
+        sql.SET("bind_status = #{record.bindStatus,jdbcType=INTEGER}");
         sql.SET("device_no = #{record.deviceNo,jdbcType=VARCHAR}");
         sql.SET("create_time_utc = #{record.createTimeUtc,jdbcType=TIMESTAMP}");
         sql.SET("modify_time_utc = #{record.modifyTimeUtc,jdbcType=TIMESTAMP}");
-        sql.SET("online_status = #{record.onlineStatus,jdbcType=INTEGER}");
-        sql.SET("count = #{record.count,jdbcType=INTEGER}");
+        sql.SET("freeze_status = #{record.freezeStatus,jdbcType=INTEGER}");
         
         LmRegistrationCodeExample example = (LmRegistrationCodeExample) parameter.get("example");
         applyWhere(sql, example, true);
@@ -203,7 +203,7 @@ public class LmRegistrationCodeSqlProvider {
         sql.UPDATE("lm_registration_code");
         
         if (record.getCardType() != null) {
-            sql.SET("card_type = #{cardType,jdbcType=INTEGER}");
+            sql.SET("card_type = #{cardType,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -223,11 +223,15 @@ public class LmRegistrationCodeSqlProvider {
         }
         
         if (record.getProType() != null) {
-            sql.SET("pro_type = #{proType,jdbcType=INTEGER}");
+            sql.SET("pro_type = #{proType,jdbcType=VARCHAR}");
         }
         
         if (record.getActivationTime() != null) {
-            sql.SET("activation_time = #{activationTime,jdbcType=INTEGER}");
+            sql.SET("activation_time = #{activationTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getBindStatus() != null) {
+            sql.SET("bind_status = #{bindStatus,jdbcType=INTEGER}");
         }
         
         if (record.getDeviceNo() != null) {
@@ -242,12 +246,8 @@ public class LmRegistrationCodeSqlProvider {
             sql.SET("modify_time_utc = #{modifyTimeUtc,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getOnlineStatus() != null) {
-            sql.SET("online_status = #{onlineStatus,jdbcType=INTEGER}");
-        }
-        
-        if (record.getCount() != null) {
-            sql.SET("count = #{count,jdbcType=INTEGER}");
+        if (record.getFreezeStatus() != null) {
+            sql.SET("freeze_status = #{freezeStatus,jdbcType=INTEGER}");
         }
         
         sql.WHERE("id = #{id,jdbcType=VARCHAR}");

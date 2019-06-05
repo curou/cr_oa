@@ -3,6 +3,8 @@ package com.curou.oa.controller;
 import com.curou.oa.entity.SearchBase;
 import com.curou.oa.entity.TableBase;
 import com.curou.oa.models.Menu;
+import com.curou.oa.models.MenuSort;
+import com.curou.oa.models.extend.MenuExtend;
 import com.curou.oa.service.MenuService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,14 +26,14 @@ public class MenuController {
     MenuService service;
 
 
-    @RequestMapping("/addMenu")
-    @ResponseBody
-    public Map<String, Object> addMenu(@RequestBody Menu menu) {
-        service.add(menu);
-        Map<String, Object> map = new HashMap<>();
-        map.put("result","success");
-        return map;
-    }
+//    @RequestMapping("/addMenu")
+//    @ResponseBody
+//    public Map<String, Object> addMenu(@RequestBody Menu menu) {
+//        service.add(menu);
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("result","success");
+//        return map;
+//    }
 
 
     @RequestMapping("/menu/getAll")
@@ -55,15 +57,21 @@ public class MenuController {
         return table;
     }
 
-
-
-    @RequestMapping("/delete")
+    @RequestMapping("/subMenu/add")
     @ResponseBody
-    public Map<String,String> delete(@RequestBody String[] ids) {
+    public Map<String,String> addSubMenu(@RequestBody  Menu menu) {
         Map<String, String> map = new HashMap<>();
-        for (int i = 0; i < ids.length; i++) {
-            System.out.println(ids[i]);
-        }
+        service.addSubMenu(menu);
+        map.put("result", "success");
+        return map;
+    }
+
+
+    @RequestMapping("/menu/delete")
+    @ResponseBody
+    public Map<String,String> delete(String id) {
+        Map<String, String> map = new HashMap<>();
+        service.delete(id);
         map.put("success", "1");
         return map;
     }
@@ -77,7 +85,49 @@ public class MenuController {
         return map;
     }
 
+    @RequestMapping("/menu/drag")
+    @ResponseBody
+    public Map<String,String> drag(@RequestBody Menu menu) {
+        Map<String, String> map = new HashMap<>();
+        service.drag(menu);
+        map.put("result", "success");
+        return map;
+    }
 
+    @RequestMapping("/menu/move")
+    @ResponseBody
+    public Map<String,String> drag(@RequestBody List<Menu> list) {
+        Map<String, String> map = new HashMap<>();
+        service.move(list);
+        map.put("result", "success");
+        return map;
+    }
+
+    @RequestMapping("/menu/menuIncludeChildren")
+    @ResponseBody
+    public List<MenuExtend> menuIncludeChildren() {
+        return service.getMenuIncludeChildrenBySort();
+    }
+
+    @RequestMapping("/menu/menuWithChildren")
+    @ResponseBody
+    public List<Menu> menuWithChildren() {
+        return service.getMenuWithChildrenBySort();
+    }
+
+
+    @RequestMapping("/menu/menuWithChildrenForTable")
+    @ResponseBody
+    public TableBase<Menu> menuWithChildrenForTable() {
+        TableBase<Menu> table = new TableBase<>();
+        table.setCode(0);
+        List<Menu> list = service.getMenuWithChildrenBySort();
+        table.setData(list);
+        table.setMsg("");
+        long count = (int) list.size();
+        table.setCount(count);
+        return table;
+    }
 
 
 

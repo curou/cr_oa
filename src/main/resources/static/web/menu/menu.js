@@ -1,55 +1,72 @@
-layui.use(['table', 'form', 'jquery', 'element'], function () {
+layui.use(['table', 'form', 'jquery', 'element', 'layer', 'curou'], function () {
     var table = layui.table
         , form = layui.form
         , $ = layui.jquery
+        , layer = layui.layer
+        , curou = layui.curou
         , element = layui.element;
 
-    //表格加载
-    table.render({
-        elem: '#demo'
-        , url: '/menu/list'
-        , toolbar: 'default'
-        , title: '菜单数据表'
-        , id: 'layuiTable' //用作主键 做刷新用
-        , page: true
-        , limit: 10//默认每页显示数量
-        , limits: [10, 20, 30]//每页显示数量类型
-        , cols: [[
-            {type: 'checkbox'}
-            , {field: 'title', title: '标题', width: 100, align: 'center'}
-            , {field: 'sort', title: '顺序', width: 100, align: 'center'}
-            , {
-                field: 'icon', title: '图标', width: 100, align: 'center', templet: function (res) {
-
-                    return '<i class="' + res.icon + '" style="font-size: 25px;"></i>';
-
-                }
-            }
-            , {
-                field: 'do', title: '操作', width: 100, align: 'center', templet: function (res) {
-
-                    return '<input hidden="hidden" value="' + res.id + '"><button class="layui-btn layui-btn-sm editIcon">更换图标</button>';
-
-                }
-            }
-
-        ]]
-    });
-
-    form.render();
 
     //监听搜索按钮
     form.on('submit(demo2)', function (data) {
-        var title = data.field.title;
-
-        table.reload('layuiTable', {
-            where: {"keyword": title}
+        var status = data.field.searchStockStatus;
+        var keyword = $("#keyword").val();
+        var begin = $("#date1").val();
+        var end = $("#date2").val();
+        //table.reload();
+        table.reload('stockList', {
+            where: {"keyword": keyword, "beginStr": begin, "endStr": end, "status": status}
         });
     });
 
-    //更改图标
-    $(document).off('click', '.editIcon').on('click', '.editIcon', function () {
-        $("#idHidden").val($(this).prev().val());
+    curou.render({
+        elem: '#treeDemo'
+        , treeTitle: 'title'//需要树状展示的字段
+        , url: '/menu/menuIncludeChildren'
+        , isOpen: false//节点是否展开，默认false
+        , drag:true//开启行拖拽，默认false
+        , dragUrl:"/menu/drag"//开启行拖拽之后必须配置，否则拖拽失效，默认向后台两个参数id和pid，id即拖拽行id，pid即被放置行id
+        , moveUrl:"menu/move"//开启moveTool之后配置，默认像后台传两行的id集合，不配置页面仍可正常移动
+        , cols: [
+            {filed: "title", align: "center", width: 200, title: "菜单"},
+            {
+                filed: "icon", align: "center", width: 100, title: "图标", templet: function (data) {
+                    if (data.icon == null || data.icon == "") {
+                        return "/";
+                    } else {
+                        return '<i class="' + data.icon + ' edit" style="font-size: 25px;"></i>';
+                    }
+                }
+            },
+
+            {filed: "permissionName", align: "center", width: 200, title: "访问权限"},
+            {filed: "path", align: "center", width: 200, title: "路径"},
+            {type: "moveTool", align: "center", width: 120, title: "移动工具"},
+            {
+                filed: "doSth", align: "center", width: 500, title: "操作", templet: function (data) {
+                    var str = '';
+                    str += '<a class="layui-btn layui-btn-primary layui-btn-sm" lay-event="addNode">添加子节点</a>';
+                    str += '<a class="layui-btn layui-btn-sm" lay-event="editNode">编辑</a>';
+                    str += '<a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="delNode">删除</a>';
+                    if (data.icon == null || data.icon == "") {
+                        return str;
+                    } else {
+                        str += '<a class="layui-btn layui-btn-warm layui-btn-sm" lay-event="editIcon">编辑图标</a>';
+                        return str;
+                    }
+                }
+            },
+        ]
+
+    });
+
+
+
+    $(document).off('click', 'a[lay-event=editIcon]').on('click', 'a[lay-event=editIcon]', function () {
+        var obj = {};
+        var tr = $(this).parents("tr:first");
+        var id = tr.attr("nodeId");
+        obj.id = id;
         layer.open({
             title: ['选择菜单图标', 'font-size:18px;']
             , shade: 0.6 //遮罩透明度
@@ -64,14 +81,12 @@ layui.use(['table', 'form', 'jquery', 'element'], function () {
                 if (val == "" || val == null) {
                     layer.msg("请选择图标！");
                 } else {
-                    var icon = $("#iconHidden").val();
-                    var id = $("#idHidden").val();
-                    var obj = {};
-                    obj.id = id;
-                    obj.icon = icon;
+                    layer.close(index);
+                    var val = $("#iconHidden").val();
+                    obj.icon = val;
+                    tr.find('i[class$=edit]').attr('class', obj.icon);
                     var json = JSON.stringify(obj);
                     layer.msg(json);
-                    //更新图标
                     $.ajax({
                         type: "POST",
                         url: "/menu/update",
@@ -79,118 +94,81 @@ layui.use(['table', 'form', 'jquery', 'element'], function () {
                         dataType: "json",
                         data: json,
                         contentType: "application/json",
-                        success: function (list) {
-                            table.reload("layuiTable");
+                        success: function (data) {
                             layer.msg('编辑成功！', {
                                 icon: 1,
-                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                                time: 1000 //如果不配置，默认是3秒
                             });
                         },
                         error: function () {
-                            console.log("更新菜单失败！");
+                            layer.msg('更新图标失败！', {
+                                icon: 1,
+                                time: 1000 //如果不配置，默认是3秒
+                            });
                         }
                     });
-                    layer.close(index);
-                }
 
+                }
             }, btn2: function (index, layero) {
                 layer.close(index);
             }, end: function () {
                 $("#iconHidden").val("");
             }
         })
-    });
-
-    //监听头工具栏事件
-    table.on('toolbar(test)', function (obj) {
-        var checkStatus = table.checkStatus(obj.config.id)
-            , data = checkStatus.data; //获取选中的数据
-        switch (obj.event) {
-            case 'add':
-                var html = "";
-                $.ajax({
-                    type: "GET",
-                    url: "/getFtl?path=menu/addMenu.ftl",
-                    async: false,
-                    success: function (data) {
-                        html = data.result;
-                    },
-                    error: function () {
-                        console.log("调用页面载入方法失败！");
-                    }
-                });
-                $("#mainbody").html(html);
-                addMenu();
-                break;
-            case 'update':
-                if (data.length === 0) {
-                    layer.msg('请选择一行');
-                } else if (data.length > 1) {
-                    layer.msg('只能同时编辑一个');
-                } else {
-                    openUpdateMenu(data);
-                }
-                break;
-            case 'delete':
-                if (data.length === 0) {
-                    layer.msg('请选择一行');
-                } else {
-                    openDeleteRole(data);
-                }
-                break;
-        }
-        ;
-    });
-
-    var openDeleteRole = function (json) {
-        layer.confirm('确定删除勾选数据吗？', {icon: 3, title: '提示'}, function (index) {
-            var arr = new Array();
-            for (var i = 0; i < json.length; i++) {
-                arr.push(json[i].id);
+    })
+    $(document).off('click', 'a[lay-event=addNode]').on('click', 'a[lay-event=addNode]', function () {
+        var tr = $(this).parents("tr:first");
+        $("#editMenuHidden").val(tr.attr('nodeId'));
+        layer.open({
+            title: ['添加子菜单', 'font-size:18px;']
+            , shade: 0.6 //遮罩透明度
+            , area: ['500px', '280px']
+            , type: 2
+            , anim: 1 //0-6的动画形式，-1不开启
+            , content: 'jump?url=menu/addSubMenu'
+            , success: function (layero, index) {
+                //layer高度自适应
+                //layer.iframeAuto(index);
             }
-            $.ajax({
-                type: "POST",
-                url: "/deleteRole",
-                traditional: true,
-                data: JSON.stringify(arr),
-                dataType: "json",
-                contentType: "application/json",
-                success: function (data) {
-                    table.reload("layuiTable");
-                    layer.msg('删除成功！', {
+            , end: function () {
+                var resultHidden = $("#resultHidden").val();
+                if (resultHidden == "success") {
+                    curou.reload();
+                    $("#resultHidden").val("");
+                    layer.msg('添加成功', {
                         icon: 1,
-                        time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        time: 500 //2秒关闭（如果不配置，默认是3秒）
                     });
-                },
-                error: function () {
-                    console.log("调用删除方法失败！");
                 }
-            });
-        });
-    }
-
-
-    var openUpdateMenu = function (json) {
-        var str = JSON.stringify(json[0]);
-        $("#editMenuHidden").val(str);
+            }
+        })
+    })
+    $(document).off('click', 'a[lay-event=editNode]').on('click', 'a[lay-event=editNode]', function () {
+        var tr = $(this).parents("tr:first");
+        var obj = new Object();
+        obj.id = tr.attr('nodeId');
+        //var pid = tr.attr('nodePid');
+        obj.title = tr.find("span[class=title]").html();
+        obj.path = tr.find("span[class=path]").html();
+        obj.permissionName = tr.find("span[class=permissionName]").html();
+        var json = JSON.stringify(obj);
+        $("#editMenuHidden").val(json);
         layer.open({
             title: ['编辑菜单', 'font-size:18px;']
             , shade: 0.6 //遮罩透明度
-            , area: ['440px', '220px']//宽度
+            , area: ['500px', '280px']
             , type: 2
             , anim: 1 //0-6的动画形式，-1不开启
             , content: 'jump?url=menu/editMenu'
             , success: function (layero, index) {
                 //layer高度自适应
                 //layer.iframeAuto(index);
-                //$('iframe').css("display","flex");
             }
             , end: function () {
                 var resultHidden = $("#resultHidden").val();
                 if (resultHidden == "success") {
 
                     $("#resultHidden").val("");
-                    table.reload("layuiTable");
                     layer.msg('编辑成功', {
                         icon: 1,
                         time: 500 //2秒关闭（如果不配置，默认是3秒）
@@ -199,8 +177,35 @@ layui.use(['table', 'form', 'jquery', 'element'], function () {
             }
         })
 
-    }
+    });
+    $(document).off('click', 'a[lay-event=delNode]').on('click', 'a[lay-event=delNode]', function () {
+        var button = $(this);
+        layer.confirm('确定删除该节点码？如节点下有子节点，将全部删除！', {icon: 3, title: '提示'}, function (index) {
+            var id = button.parents("tr:first").attr('nodeId');
+            $.ajax({
+                type: "GET",
+                url: "/menu/delete",
+                traditional: true,
+                dataType: "json",
+                data: {
+                    "id": id
+                },
+                success: function (data) {
+                    curou.reload();
+                    layer.msg('删除成功！', {
+                        icon: 1,
+                        time: 1000 //如果不配置，默认是3秒
+                    });
+                },
+                error: function () {
+                    layer.msg('删除失败！', {
+                        icon: 1,
+                        time: 1000 //如果不配置，默认是3秒
+                    });
+                }
+            });
+        })
+    })
 
 
 })
-

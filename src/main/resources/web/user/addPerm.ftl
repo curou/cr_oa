@@ -18,6 +18,13 @@
                        class="layui-input">
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限标志</label>
+            <div class="layui-input-block">
+                <input type="text" name="flag" id="flag" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
 
 
         <div class="layui-form-item">
@@ -41,10 +48,8 @@
 
         //监听搜索按钮
         form.on('submit(demo1)', function (data) {
-            console.log(data);
             var index = parent.layer.getFrameIndex(window.name);
             var json = JSON.stringify(data.field);
-            debugger;
             $.ajax({
                 type: "POST",
                 url: "/permissionAOU",

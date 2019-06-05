@@ -30,7 +30,7 @@ layui.use(['table', 'form', 'jquery', 'element', 'laydate'], function () {
             , limit: 10
             , limits: [10, 20, 30]
             , cols: [[ //表头
-                {type: 'checkbox'}
+                {type: 'checkbox',width: 50}
                 , {field: 'stockName', align: 'center', title: '仓库名', width: 130, edit: 'text'}
                 , {field: 'stockCreateTimeUtc', align: 'center', title: '创建时间', width: 220, sort: true}
                 , {

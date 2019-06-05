@@ -100,5 +100,20 @@ public class PermissionServiceImpl implements PermissionService {
         return true;
     }
 
+    @Override
+    public Boolean checkFlag(Permission permission) {
+        PermissionExample example = new PermissionExample();
+        PermissionExample.Criteria criteria = example.createCriteria();
+        if (StringUtils.isNotBlank(permission.getId())) {
+            criteria.andIdNotEqualTo(permission.getId());
+        }
+        criteria.andFlagEqualTo(permission.getFlag());
+        List<Permission> list = mapper.selectByExample(example);
+        if (ListUtils.isNotNullOrEmpty(list)){
+            return false;
+        }
+        return true;
+    }
+
 
 }

@@ -6,7 +6,7 @@ import java.util.Date;
 public class LmRegistrationCode implements Serializable {
     private String id;
 
-    private Integer cardType;
+    private String cardType;
 
     private Integer status;
 
@@ -16,9 +16,11 @@ public class LmRegistrationCode implements Serializable {
 
     private String code;
 
-    private Integer proType;
+    private String proType;
 
-    private Integer activationTime;
+    private Date activationTime;
+
+    private Integer bindStatus;
 
     private String deviceNo;
 
@@ -26,9 +28,7 @@ public class LmRegistrationCode implements Serializable {
 
     private Date modifyTimeUtc;
 
-    private Integer onlineStatus;
-
-    private Integer count;
+    private Integer freezeStatus;
 
     private static final long serialVersionUID = 1L;
 
@@ -40,12 +40,12 @@ public class LmRegistrationCode implements Serializable {
         this.id = id == null ? null : id.trim();
     }
 
-    public Integer getCardType() {
+    public String getCardType() {
         return cardType;
     }
 
-    public void setCardType(Integer cardType) {
-        this.cardType = cardType;
+    public void setCardType(String cardType) {
+        this.cardType = cardType == null ? null : cardType.trim();
     }
 
     public Integer getStatus() {
@@ -80,20 +80,28 @@ public class LmRegistrationCode implements Serializable {
         this.code = code == null ? null : code.trim();
     }
 
-    public Integer getProType() {
+    public String getProType() {
         return proType;
     }
 
-    public void setProType(Integer proType) {
-        this.proType = proType;
+    public void setProType(String proType) {
+        this.proType = proType == null ? null : proType.trim();
     }
 
-    public Integer getActivationTime() {
+    public Date getActivationTime() {
         return activationTime;
     }
 
-    public void setActivationTime(Integer activationTime) {
+    public void setActivationTime(Date activationTime) {
         this.activationTime = activationTime;
+    }
+
+    public Integer getBindStatus() {
+        return bindStatus;
+    }
+
+    public void setBindStatus(Integer bindStatus) {
+        this.bindStatus = bindStatus;
     }
 
     public String getDeviceNo() {
@@ -120,19 +128,11 @@ public class LmRegistrationCode implements Serializable {
         this.modifyTimeUtc = modifyTimeUtc;
     }
 
-    public Integer getOnlineStatus() {
-        return onlineStatus;
+    public Integer getFreezeStatus() {
+        return freezeStatus;
     }
 
-    public void setOnlineStatus(Integer onlineStatus) {
-        this.onlineStatus = onlineStatus;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setFreezeStatus(Integer freezeStatus) {
+        this.freezeStatus = freezeStatus;
     }
 }

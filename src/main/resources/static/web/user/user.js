@@ -37,7 +37,7 @@ layui.use(['table', 'form', 'jquery', 'element'], function () {
         , limit: 10//默认每页显示数量
         , limits: [10, 20, 30]//每页显示数量类型
         , cols: [[
-            {type: 'checkbox'}
+            {type: 'checkbox',width: 50}
             , {field: 'account', title: '用户名', width: 120, align: 'center'}
             , {field: 'name', title: '姓名', width: 100, align: 'center', sort: true}
             , {field: 'sex', title: '性别', width: 70, align: 'center'}

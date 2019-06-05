@@ -31,9 +31,11 @@ public interface RoleMapper {
 
     @Insert({
         "insert into role (id, name, ",
-        "create_time_utc, modify_time_utc)",
+        "code, create_time_utc, ",
+        "modify_time_utc)",
         "values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, ",
-        "#{createTimeUtc,jdbcType=TIMESTAMP}, #{modifyTimeUtc,jdbcType=TIMESTAMP})"
+        "#{code,jdbcType=VARCHAR}, #{createTimeUtc,jdbcType=TIMESTAMP}, ",
+        "#{modifyTimeUtc,jdbcType=TIMESTAMP})"
     })
     int insert(Role record);
 
@@ -44,6 +46,7 @@ public interface RoleMapper {
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="code", property="code", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time_utc", property="createTimeUtc", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="modify_time_utc", property="modifyTimeUtc", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -51,13 +54,14 @@ public interface RoleMapper {
 
     @Select({
         "select",
-        "id, name, create_time_utc, modify_time_utc",
+        "id, name, code, create_time_utc, modify_time_utc",
         "from role",
         "where id = #{id,jdbcType=VARCHAR}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="code", property="code", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time_utc", property="createTimeUtc", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="modify_time_utc", property="modifyTimeUtc", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -75,6 +79,7 @@ public interface RoleMapper {
     @Update({
         "update role",
         "set name = #{name,jdbcType=VARCHAR},",
+          "code = #{code,jdbcType=VARCHAR},",
           "create_time_utc = #{createTimeUtc,jdbcType=TIMESTAMP},",
           "modify_time_utc = #{modifyTimeUtc,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=VARCHAR}"

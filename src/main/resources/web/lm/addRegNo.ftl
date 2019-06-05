@@ -44,14 +44,6 @@
             </div>
         </div>
 
-        <div class="layui-form-item"  id="tabDiv" style="margin-left: 30px;display: none">
-            <div class="layui-tab layui-tab-brief" lay-filter="demo" lay-allowclose="true" id="demo">
-                <ul class="layui-tab-title" >
-                </ul>
-                <div class="layui-tab-content">
-                </div>
-            </div>
-        </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block">
@@ -76,27 +68,25 @@
         form.render();
 
          var index = parent.layer.getFrameIndex(window.name);
-        parent.layer.iframeAuto(index);
 
         //监听提交
         form.on('submit(demo1)', function (data) {
             var json = JSON.stringify(data.field);
-            layer.msg(json);
-            // $.ajax({
-            //     type: "POST",
-            //     url: "/addProduct",
-            //     data: json,
-            //     dataType: "json",
-            //     contentType: "application/json",
-            //     success: function (data) {
-            //         parent.layui.$("#addProductHidden").val(data.result);
-            //         parent.layer.close(index);
-            //     },
-            //     error: function (data) {
-            //         parent.layui.$("#addProductHidden").val(2);
-            //         parent.layer.close(index);
-            //     }
-            // });
+            $.ajax({
+                type: "POST",
+                url: "lmRegistrationCode/add",
+                data: json,
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    parent.layui.$("#resultHidden").val(data.result);
+                    parent.layer.close(index);
+                },
+                error: function (data) {
+                    parent.layui.$("#resultHidden").val(2);
+                    parent.layer.close(index);
+                }
+            });
         });
 
 

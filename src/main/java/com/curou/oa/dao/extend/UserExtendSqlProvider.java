@@ -31,7 +31,13 @@ public class UserExtendSqlProvider {
         return sb.toString();
     }
 
-    public String getPermsByUserAccount(String account){
+    public String getPermsFlagByUserAccount(String account){
+        StringBuffer sb = new StringBuffer();
+        sb.append("select d.flag from user as a,user_roles as b,roles_permissions as c,permission as d where a.id=b.user_id and b.role_id = c.role_id and c.perm_id = d.id and a.account='"+account+"'");
+        return sb.toString();
+    }
+
+    public String getPermsIdByUserAccount(String account){
         StringBuffer sb = new StringBuffer();
         sb.append("select d.id from user as a,user_roles as b,roles_permissions as c,permission as d where a.id=b.user_id and b.role_id = c.role_id and c.perm_id = d.id and a.account='"+account+"'");
         return sb.toString();

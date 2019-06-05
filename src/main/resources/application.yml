@@ -31,6 +31,8 @@ password:
   default: 123456
   algorithm: MD5
   count: 5
+lm:
+  key: 1993
 
 server:
   port: 80

@@ -29,7 +29,7 @@ public class MenuSqlProvider {
         sql.INSERT_INTO("menu");
         
         if (record.getId() != null) {
-            sql.VALUES("id", "#{id,jdbcType=INTEGER}");
+            sql.VALUES("id", "#{id,jdbcType=VARCHAR}");
         }
         
         if (record.getTitle() != null) {
@@ -40,24 +40,16 @@ public class MenuSqlProvider {
             sql.VALUES("icon", "#{icon,jdbcType=VARCHAR}");
         }
         
-        if (record.getUrl() != null) {
-            sql.VALUES("url", "#{url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSort() != null) {
-            sql.VALUES("sort", "#{sort,jdbcType=INTEGER}");
-        }
-        
         if (record.getPath() != null) {
             sql.VALUES("path", "#{path,jdbcType=VARCHAR}");
         }
         
-        if (record.getSubSort() != null) {
-            sql.VALUES("sub_sort", "#{subSort,jdbcType=INTEGER}");
+        if (record.getPermissionId() != null) {
+            sql.VALUES("permission_id", "#{permissionId,jdbcType=VARCHAR}");
         }
         
-        if (record.getPermissionKey() != null) {
-            sql.VALUES("permission_key", "#{permissionKey,jdbcType=VARCHAR}");
+        if (record.getPid() != null) {
+            sql.VALUES("pid", "#{pid,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -72,11 +64,9 @@ public class MenuSqlProvider {
         }
         sql.SELECT("title");
         sql.SELECT("icon");
-        sql.SELECT("url");
-        sql.SELECT("sort");
         sql.SELECT("path");
-        sql.SELECT("sub_sort");
-        sql.SELECT("permission_key");
+        sql.SELECT("permission_id");
+        sql.SELECT("pid");
         sql.FROM("menu");
         applyWhere(sql, example, false);
         
@@ -95,7 +85,7 @@ public class MenuSqlProvider {
         sql.UPDATE("menu");
         
         if (record.getId() != null) {
-            sql.SET("id = #{record.id,jdbcType=INTEGER}");
+            sql.SET("id = #{record.id,jdbcType=VARCHAR}");
         }
         
         if (record.getTitle() != null) {
@@ -106,24 +96,16 @@ public class MenuSqlProvider {
             sql.SET("icon = #{record.icon,jdbcType=VARCHAR}");
         }
         
-        if (record.getUrl() != null) {
-            sql.SET("url = #{record.url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSort() != null) {
-            sql.SET("sort = #{record.sort,jdbcType=INTEGER}");
-        }
-        
         if (record.getPath() != null) {
             sql.SET("path = #{record.path,jdbcType=VARCHAR}");
         }
         
-        if (record.getSubSort() != null) {
-            sql.SET("sub_sort = #{record.subSort,jdbcType=INTEGER}");
+        if (record.getPermissionId() != null) {
+            sql.SET("permission_id = #{record.permissionId,jdbcType=VARCHAR}");
         }
         
-        if (record.getPermissionKey() != null) {
-            sql.SET("permission_key = #{record.permissionKey,jdbcType=VARCHAR}");
+        if (record.getPid() != null) {
+            sql.SET("pid = #{record.pid,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -134,14 +116,12 @@ public class MenuSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("menu");
         
-        sql.SET("id = #{record.id,jdbcType=INTEGER}");
+        sql.SET("id = #{record.id,jdbcType=VARCHAR}");
         sql.SET("title = #{record.title,jdbcType=VARCHAR}");
         sql.SET("icon = #{record.icon,jdbcType=VARCHAR}");
-        sql.SET("url = #{record.url,jdbcType=VARCHAR}");
-        sql.SET("sort = #{record.sort,jdbcType=INTEGER}");
         sql.SET("path = #{record.path,jdbcType=VARCHAR}");
-        sql.SET("sub_sort = #{record.subSort,jdbcType=INTEGER}");
-        sql.SET("permission_key = #{record.permissionKey,jdbcType=VARCHAR}");
+        sql.SET("permission_id = #{record.permissionId,jdbcType=VARCHAR}");
+        sql.SET("pid = #{record.pid,jdbcType=VARCHAR}");
         
         MenuExample example = (MenuExample) parameter.get("example");
         applyWhere(sql, example, true);
@@ -160,27 +140,19 @@ public class MenuSqlProvider {
             sql.SET("icon = #{icon,jdbcType=VARCHAR}");
         }
         
-        if (record.getUrl() != null) {
-            sql.SET("url = #{url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSort() != null) {
-            sql.SET("sort = #{sort,jdbcType=INTEGER}");
-        }
-        
         if (record.getPath() != null) {
             sql.SET("path = #{path,jdbcType=VARCHAR}");
         }
         
-        if (record.getSubSort() != null) {
-            sql.SET("sub_sort = #{subSort,jdbcType=INTEGER}");
+        if (record.getPermissionId() != null) {
+            sql.SET("permission_id = #{permissionId,jdbcType=VARCHAR}");
         }
         
-        if (record.getPermissionKey() != null) {
-            sql.SET("permission_key = #{permissionKey,jdbcType=VARCHAR}");
+        if (record.getPid() != null) {
+            sql.SET("pid = #{pid,jdbcType=VARCHAR}");
         }
         
-        sql.WHERE("id = #{id,jdbcType=INTEGER}");
+        sql.WHERE("id = #{id,jdbcType=VARCHAR}");
         
         return sql.toString();
     }

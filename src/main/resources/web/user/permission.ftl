@@ -24,6 +24,6 @@
     <input id="addResult" value="" hidden="hidden">
     <input id="editResult" value="" hidden="hidden">
     <input id="editName" value="" hidden="hidden">
-    <#--<input id="editFlag" value="" hidden="hidden">-->
+    <input id="editFlag" value="" hidden="hidden">
     <input id="editId" value="" hidden="hidden">
 </div>

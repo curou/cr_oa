@@ -25,17 +25,17 @@ public interface MenuMapper {
 
     @Delete({
         "delete from menu",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=VARCHAR}"
     })
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     @Insert({
         "insert into menu (id, title, ",
-        "icon, url, sort, ",
-        "path, sub_sort, permission_key)",
-        "values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, ",
-        "#{icon,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, ",
-        "#{path,jdbcType=VARCHAR}, #{subSort,jdbcType=INTEGER}, #{permissionKey,jdbcType=VARCHAR})"
+        "icon, path, permission_id, ",
+        "pid)",
+        "values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, ",
+        "#{icon,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{permissionId,jdbcType=VARCHAR}, ",
+        "#{pid,jdbcType=VARCHAR})"
     })
     int insert(Menu record);
 
@@ -44,34 +44,30 @@ public interface MenuMapper {
 
     @SelectProvider(type=MenuSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="title", property="title", jdbcType=JdbcType.VARCHAR),
         @Result(column="icon", property="icon", jdbcType=JdbcType.VARCHAR),
-        @Result(column="url", property="url", jdbcType=JdbcType.VARCHAR),
-        @Result(column="sort", property="sort", jdbcType=JdbcType.INTEGER),
         @Result(column="path", property="path", jdbcType=JdbcType.VARCHAR),
-        @Result(column="sub_sort", property="subSort", jdbcType=JdbcType.INTEGER),
-        @Result(column="permission_key", property="permissionKey", jdbcType=JdbcType.VARCHAR)
+        @Result(column="permission_id", property="permissionId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="pid", property="pid", jdbcType=JdbcType.VARCHAR)
     })
     List<Menu> selectByExample(MenuExample example);
 
     @Select({
         "select",
-        "id, title, icon, url, sort, path, sub_sort, permission_key",
+        "id, title, icon, path, permission_id, pid",
         "from menu",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=VARCHAR}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="title", property="title", jdbcType=JdbcType.VARCHAR),
         @Result(column="icon", property="icon", jdbcType=JdbcType.VARCHAR),
-        @Result(column="url", property="url", jdbcType=JdbcType.VARCHAR),
-        @Result(column="sort", property="sort", jdbcType=JdbcType.INTEGER),
         @Result(column="path", property="path", jdbcType=JdbcType.VARCHAR),
-        @Result(column="sub_sort", property="subSort", jdbcType=JdbcType.INTEGER),
-        @Result(column="permission_key", property="permissionKey", jdbcType=JdbcType.VARCHAR)
+        @Result(column="permission_id", property="permissionId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="pid", property="pid", jdbcType=JdbcType.VARCHAR)
     })
-    Menu selectByPrimaryKey(Integer id);
+    Menu selectByPrimaryKey(String id);
 
     @UpdateProvider(type=MenuSqlProvider.class, method="updateByExampleSelective")
     int updateByExampleSelective(@Param("record") Menu record, @Param("example") MenuExample example);
@@ -86,12 +82,10 @@ public interface MenuMapper {
         "update menu",
         "set title = #{title,jdbcType=VARCHAR},",
           "icon = #{icon,jdbcType=VARCHAR},",
-          "url = #{url,jdbcType=VARCHAR},",
-          "sort = #{sort,jdbcType=INTEGER},",
           "path = #{path,jdbcType=VARCHAR},",
-          "sub_sort = #{subSort,jdbcType=INTEGER},",
-          "permission_key = #{permissionKey,jdbcType=VARCHAR}",
-        "where id = #{id,jdbcType=INTEGER}"
+          "permission_id = #{permissionId,jdbcType=VARCHAR},",
+          "pid = #{pid,jdbcType=VARCHAR}",
+        "where id = #{id,jdbcType=VARCHAR}"
     })
     int updateByPrimaryKey(Menu record);
 }

@@ -32,6 +32,7 @@ public class ShiroConfigBean {
         // 拦截器.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         // 设置login URL
+
         shiroFilterFactoryBean.setLoginUrl("/login");
         // 登录成功后要跳转的链接 SrpingMVC的优先级别比较高 所以这个跳转没有用
         shiroFilterFactoryBean.setSuccessUrl("/");
@@ -48,6 +49,8 @@ public class ShiroConfigBean {
         filterChainDefinitionMap.put("/js/**", "anon");
         // 设置登录的URL为匿名访问，因为一开始没有用户验证
         filterChainDefinitionMap.put("/login", "anon");
+
+        filterChainDefinitionMap.put("/lmRegistrationCode/check", "anon");
         filterChainDefinitionMap.put("/checkLogin", "anon");
 
         filterChainDefinitionMap.put("/Exception.class", "anon");

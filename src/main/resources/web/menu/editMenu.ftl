@@ -5,22 +5,29 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>添加用户</title>
+    <title>编辑菜单</title>
     <link rel="stylesheet" href="/layui/css/layui.css"/>
 </head>
 <body>
 <div style="margin-right: 20px;margin-top: 10px">
     <form class="layui-form" action="javascript:;" id="editUserForm">
         <div class="layui-form-item">
-            <label class="layui-form-label">标题</label>
+            <label class="layui-form-label">菜单</label>
             <div class="layui-input-block">
                 <input type="text" name="title" id="title" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">顺序</label>
+            <label class="layui-form-label">路径</label>
             <div class="layui-input-block">
-                <input type="text" name="sort" id="sort" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="path" id="path" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">访问权限</label>
+            <div class="layui-input-block">
+                <select name="permissionId" lay-filter="permissionId" id="permissionId">
+                </select>
             </div>
         </div>
         <input hidden="hidden" name="id" id="menuId">
@@ -44,27 +51,62 @@
 
         var json = parent.layui.$("#editMenuHidden").val();
         var obj = JSON.parse(json);
-        $("#title").val(obj.title);
-        $("#sort").val(obj.sort);
+        var title = obj.title;
+        $("#title").val(title);
+        var permissionName = obj.permissionName;
         $("#menuId").val(obj.id);
+        var path = obj.path;
+        $("#path").val(path);
+
+        //遍历权限列表
+        $.ajax({
+            type: "POST",
+            url: "/getAllPerms",
+            traditional: true,
+            dataType: "json",
+            async:false,
+            contentType: "application/json",
+            success: function (list) {
+                var str = '<option value=""></option>';
+                for (var i = 0; i < list.length; i++) {
+                    if(list[i].name==permissionName){
+                        str += '<option value="' + list[i].id + '" selected>' + list[i].name + '</option>';
+                    }else{
+                        str += '<option value="' + list[i].id + '">' + list[i].name + '</option>';
+                    }
+
+                }
+                $("#permissionId").html(str);
+            },
+            error: function () {
+                console.log("获取权限列表失败！");
+            }
+        });
+
+        form.render();
 
 
 
         //监听搜索按钮
         form.on('submit(demo1)', function (data) {
-            if(data.field.title==obj.title&&data.field.sort==obj.sort){
+            var perm = $("#permissionId").find("option:selected").text();
+            if(data.field.title==obj.title&&data.field.path==obj.path&&perm==permissionName){
                 layer.msg("数据未改变！");
             }else{
                 var json = JSON.stringify(data.field);
                 var index = parent.layer.getFrameIndex(window.name);
+                debugger;
                 $.ajax({
                     type: "POST",
                     url: "/menu/update",
                     data:json,
                     dataType:"json",
                     contentType: "application/json",
-                    success: function (data) {
-                        parent.layui.$("#resultHidden").val(data.result);
+                    success: function (map) {
+                        parent.layui.$("#resultHidden").val(map.result);
+                        parent.layui.$('tr[nodeId='+data.field.id+']').find('span[class=title]').html(data.field.title);
+                        parent.layui.$('tr[nodeId='+data.field.id+']').find('span[class=path]').html(data.field.path);
+                        parent.layui.$('tr[nodeId='+data.field.id+']').find('span[class=permissionName]').html(perm);
                         parent.layer.close(index);
                     },
                     error: function (data) {

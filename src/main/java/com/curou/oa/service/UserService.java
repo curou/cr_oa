@@ -36,5 +36,7 @@ public interface UserService {
 
     User getByAccount(String account);
 
-    List<String> getPermsByUserAccount(String account);
+    List<String> getPermsFlagByUserAccount(String account);
+
+    List<String> getPermsIdByUserAccount(String account);
 }

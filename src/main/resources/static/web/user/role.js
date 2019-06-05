@@ -15,11 +15,11 @@ layui.use(['table', 'form', 'jquery', 'element'], function () {
         , limit: 10//默认每页显示数量
         , limits: [10, 20, 30]//每页显示数量类型
         , cols: [[
-            {type: 'checkbox'}
+            {type: 'checkbox',width: 60}
             // , {field: 'flag', title: '标志', width: 100, align: 'center'}
-            , {field: 'name', title: '角色名', width: 100, align: 'center'}
-            , {field: 'perm', title: '权限', width: 200, align: 'center'}
-            , {field: 'createTimeUtc', title: '创建时间', align: 'center', width: 180, sort: true}
+            , {field: 'name', title: '角色名', width: 200, align: 'center'}
+            , {field: 'perm', title: '权限', width: 300, align: 'center'}
+            , {field: 'createTimeUtc', title: '创建时间', align: 'center', width: 220, sort: true}
         ]]
     });
 

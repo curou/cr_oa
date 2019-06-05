@@ -27,7 +27,7 @@ public class CuRouShiroRealm extends AuthorizingRealm {
         System.out.println("调用醋肉自定义授权");
         User user = userService.getByAccount(principalCollection.getPrimaryPrincipal().toString());
         //从数据库或者缓存中获取权限数据
-        List<String> perms = userService.getPermsByUserAccount(user.getAccount());
+        List<String> perms = userService.getPermsFlagByUserAccount(user.getAccount());
         Set<String> pSet = new HashSet<>(perms);
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         simpleAuthorizationInfo.setStringPermissions(pSet);

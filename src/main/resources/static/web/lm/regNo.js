@@ -77,22 +77,52 @@ layui.use(['table', 'form', 'jquery', 'element', 'laydate', 'carousel', 'upload'
     table.render({
         elem: '#demo'
         , id: "layuiTable"
-        , url: 'uploadDetail/list' //数据接口
+        , url: 'lmRegistrationCode/list' //数据接口
         , title: '查询明细表'
         , page: true //开启分页
-        , toolbar: 'default'
-        , limit: 10
-        , limits: [10, 20, 30]
+         , toolbar: '#toolbarDemo'
+        , limit: 50
+        , limits: [50,100,200,500]
         , cols: [[ //表头
             {type: 'numbers', title: '序号'}
-            , {field: 'createTimeUtc', align: 'center', title: '查询时间', width: 220}
-            , {field: 'count', align: 'center', title: '查询总数', width: 130}
-            , {field: 'effectiveCount', align: 'center', title: '有效数量', width: 130}
-            , {
-                field: 'switch', title: '操作', align: 'center', width: 150, templet: function (res) {
-                    return '<a  href="exportCompanyInfo?uploadDetailId=' + res.id + '" class="layui-btn layui-btn-sm layui-btn-normal">导出EXCEL</a>';
+            , {field: 'code', align: 'center', title: '注册码', width: 300}
+            , {field: 'cardName', align: 'center', title: '卡类型', width: 85}
+            , {field: 'proName', align: 'center', title: '项目类型', width: 95}
+            , {field: 'remark', align: 'center', title: '备注', width: 95}
+            , {field: 'status', align: 'center', title: '状态', width: 80,templet: function (res) {
+                   if(res.status==0){
+                        return "未使用";
+                   }else if(res.status==1){
+                        return "使用中";
+                    }else{
+                        return "已过期";
+                    }
                 }
-            }
+
+           }
+            , {field: 'createTimeUtc', align: 'center', title: '创建时间', width: 180}
+            , {field: 'activationTime', align: 'center', title: '激活时间', width: 180}
+            , {field: 'expirationTime', align: 'center', title: '到期时间', width: 180}
+            ,{
+                fixed:"right",filed: "doSth", align: "center", width: 280, title: "操作", templet: function (data) {
+                    var str = '';
+                    if (data.freezeStatus == 0) {
+                        str += '<span hidden="hidden">'+data.id+'</span><a class="layui-btn layui-btn-primary layui-btn-sm freeze">冻结</a>';
+                    } else {
+                        str += '<span hidden="hidden">'+data.id+'</span><a class="layui-btn layui-btn-primary layui-btn-sm freeze">解冻</a>';
+                    }
+                    if (data.status != 0) {
+                        str += '<a class="layui-btn layui-btn-sm renewal">续费</a>';
+                    }
+                    str += '<a class="layui-btn layui-btn-danger layui-btn-sm del">删除</a>';
+                    if (data.bindStatus == 0) {
+                        return str;
+                    } else {
+                        str += '<a class="layui-btn layui-btn-warm layui-btn-sm unbind">解绑</a>';
+                        return str;
+                    }
+                }
+            },
         ]]
     });
     form.render();
@@ -125,6 +155,30 @@ layui.use(['table', 'form', 'jquery', 'element', 'laydate', 'carousel', 'upload'
         ;
     });
 
+    $(document).off('click', '.freeze').on('click', '.freeze', function (data) {
+        var id = $(this).parent().find("span").html();
+        var str = $(this).html();
+        freezeCode(id,str);
+    });
+    $(document).off('click', '.addCode').on('click', '.addCode', function (data) {
+        openAddRegCode();
+    });
+    $(document).off('click', '.unbind').on('click', '.unbind', function (data) {
+        var id = $(this).parent().find("span").html();
+        unbindCode(id);
+    });
+    $(document).off('click', '.del').on('click', '.del', function (data) {
+        var id = $(this).parent().find("span").html();
+        openDeleteCode(id);
+    });
+    $(document).off('click', '.renewal').on('click', '.renewal', function (data) {
+        var id = $(this).parent().find("span").html();
+        $("#hiddenId").val(id);
+        openRenewalCode();
+
+    });
+
+
     var openAddRegCode = function () {
         layer.open({
             title: ['生成注册码', 'font-size:18px;']
@@ -139,53 +193,153 @@ layui.use(['table', 'form', 'jquery', 'element', 'laydate', 'carousel', 'upload'
                 layer.iframeAuto(index);
             }
             , end: function () {
-                var addProductHidden = $("#addProductHidden").val();
-                if (addProductHidden == "success") {
-
-                    $("#addProductHidden").val("");
-                    tableRender();
+                var resultHidden = $("#resultHidden").val();
+                if (resultHidden == "success") {
+                    table.reload("layuiTable");
+                    $("#resultHidden").val("");
                     layer.msg('添加成功', {
                         icon: 1,
                         time: 500 //2秒关闭（如果不配置，默认是3秒）
                     });
-                } else if (addProductHidden == 2) {
+                } else if (resultHidden == 2) {
                     layer.msg('添加失败',
                         {icon: 2, time: 500}
-                    )
-                } else if (addProductHidden == "repeatName") {
-                    layer.msg('产品名重复',
-                        {icon: 2, time: 800}
                     )
                 }
             }
         })
     }
 
+    var openRenewalCode = function () {
+
+        layer.open({
+            title: ['续费', 'font-size:18px;']
+            , shade: 0.6 //遮罩透明度
+            //, area: ['700px','250px']//宽度
+            , area: '350px'
+            , type: 2
+            , anim: 1 //0-6的动画形式，-1不开启
+            , content: 'jump?url=lm/renewal'
+            , success: function (layero, index) {
+                //layer高度自适应
+                layer.iframeAuto(index);
+            }
+            , end: function () {
+                debugger;
+                var resultHidden = $("#resultHidden").val();
+                if (resultHidden == "success") {
+                    table.reload("layuiTable");
+                    $("#resultHidden").val("");
+
+                    $("#hiddenId").val("");
+                    layer.msg('续费成功', {
+                        icon: 1,
+                        time: 500 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                } else if (resultHidden == 2) {
+                    layer.msg('续费失败',
+                        {icon: 2, time: 500}
+                    )
+                }
+            }
+        })
+    }
+
+    var openDeleteCode = function (id) {
+        layer.confirm('确定删除勾选数据吗？', {icon: 3, title: '提示'}, function (index) {
+
+            $.ajax({
+                type: "POST",
+                url: "lmRegistrationCode/del",
+                traditional: true,
+                data: {
+                    "id": id
+                },
+                success: function (data) {
+                    table.reload("layuiTable");
+                    layer.msg('删除成功！', {
+                        icon: 1,
+                        time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                },
+                error: function () {
+                    console.log("调用删除方法失败！");
+                }
+            });
+        });
+    }
+    var freezeCode = function (id,str) {
+        layer.confirm('确定'+str+'吗？', {icon: 3, title: '提示'}, function (index) {
+
+            $.ajax({
+                type: "POST",
+                url: "lmRegistrationCode/freeze",
+                traditional: true,
+                data: {
+                    "id": id
+                },
+                success: function (data) {
+                    table.reload("layuiTable");
+                    layer.msg(str+'成功！', {
+                        icon: 1,
+                        time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                },
+                error: function () {
+                    console.log(str+"失败！");
+                }
+            });
+        });
+    }
+
+    var unbindCode = function (id) {
+        layer.confirm('确定解绑吗？', {icon: 3, title: '提示'}, function (index) {
+
+            $.ajax({
+                type: "POST",
+                url: "lmRegistrationCode/unbind",
+                traditional: true,
+                data: {
+                    "id": id
+                },
+                success: function (data) {
+                    table.reload("layuiTable");
+                    layer.msg('解绑成功！', {
+                        icon: 1,
+                        time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                },
+                error: function () {
+                    console.log("失败！");
+                }
+            });
+        });
+    }
+
 
     //监听搜索按钮
     form.on('submit(demo2)', function (data) {
-        // console.log(data);
         table.reload('layuiTable', {
-            where: {"beginStr": data.field.beginDate, "endStr": data.field.endDate}
+            where: {"proType": data.field.proType,"cardType": data.field.cardType, "beginStr": data.field.beginDate, "endStr": data.field.endDate, "status": data.field.status,"keyword":data.field.remark}
         });
     });
 
-    //监听按钮点击
-    $(document).off('click', '.export').on('click', '.export', function (data) {
-        //layer.msg($(this).prev().attr("data"));
-        $.ajax({
-            type: "GET",
-            url: "/exportCompanyInfo?uploadDetailId=" + $(this).prev().attr("data"),
-            async: false,
-            dataType: "json",
-            success: function (data) {
-
-            },
-            error: function () {
-                console.log("调用页面载入方法失败！");
-            }
-        });
-    });
+    // //监听按钮点击
+    // $(document).off('click', '.export').on('click', '.export', function (data) {
+    //     //layer.msg($(this).prev().attr("data"));
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/exportCompanyInfo?uploadDetailId=" + $(this).prev().attr("data"),
+    //         async: false,
+    //         dataType: "json",
+    //         success: function (data) {
+    //
+    //         },
+    //         error: function () {
+    //             console.log("调用页面载入方法失败！");
+    //         }
+    //     });
+    // });
 
 
 })

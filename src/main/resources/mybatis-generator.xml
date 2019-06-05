@@ -52,6 +52,7 @@
 		<!--<table tableName="stock_order_detail" domainObjectName="StockOrderDetail"></table>-->
 		<!--<table tableName="stock_order" domainObjectName="StockOrder"></table>-->
 		<!--<table tableName="product_unit" domainObjectName="ProductUnit"></table>-->
+		<table tableName="menu_sort" domainObjectName="MenuSort"></table>
 
 		<!--<table tableName="roles_permissions" domainObjectName="RolesPermissions"></table>-->
 		<!--<table tableName="department" domainObjectName="Department"></table>-->

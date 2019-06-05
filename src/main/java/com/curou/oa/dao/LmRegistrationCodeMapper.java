@@ -33,15 +33,15 @@ public interface LmRegistrationCodeMapper {
         "insert into lm_registration_code (id, card_type, ",
         "status, expiration_time, ",
         "remark, code, pro_type, ",
-        "activation_time, device_no, ",
-        "create_time_utc, modify_time_utc, ",
-        "online_status, count)",
-        "values (#{id,jdbcType=VARCHAR}, #{cardType,jdbcType=INTEGER}, ",
+        "activation_time, bind_status, ",
+        "device_no, create_time_utc, ",
+        "modify_time_utc, freeze_status)",
+        "values (#{id,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, ",
         "#{status,jdbcType=INTEGER}, #{expirationTime,jdbcType=TIMESTAMP}, ",
-        "#{remark,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{proType,jdbcType=INTEGER}, ",
-        "#{activationTime,jdbcType=INTEGER}, #{deviceNo,jdbcType=VARCHAR}, ",
-        "#{createTimeUtc,jdbcType=TIMESTAMP}, #{modifyTimeUtc,jdbcType=TIMESTAMP}, ",
-        "#{onlineStatus,jdbcType=INTEGER}, #{count,jdbcType=INTEGER})"
+        "#{remark,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{proType,jdbcType=VARCHAR}, ",
+        "#{activationTime,jdbcType=TIMESTAMP}, #{bindStatus,jdbcType=INTEGER}, ",
+        "#{deviceNo,jdbcType=VARCHAR}, #{createTimeUtc,jdbcType=TIMESTAMP}, ",
+        "#{modifyTimeUtc,jdbcType=TIMESTAMP}, #{freezeStatus,jdbcType=INTEGER})"
     })
     int insert(LmRegistrationCode record);
 
@@ -51,42 +51,42 @@ public interface LmRegistrationCodeMapper {
     @SelectProvider(type=LmRegistrationCodeSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
-        @Result(column="card_type", property="cardType", jdbcType=JdbcType.INTEGER),
+        @Result(column="card_type", property="cardType", jdbcType=JdbcType.VARCHAR),
         @Result(column="status", property="status", jdbcType=JdbcType.INTEGER),
         @Result(column="expiration_time", property="expirationTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="remark", property="remark", jdbcType=JdbcType.VARCHAR),
         @Result(column="code", property="code", jdbcType=JdbcType.VARCHAR),
-        @Result(column="pro_type", property="proType", jdbcType=JdbcType.INTEGER),
-        @Result(column="activation_time", property="activationTime", jdbcType=JdbcType.INTEGER),
+        @Result(column="pro_type", property="proType", jdbcType=JdbcType.VARCHAR),
+        @Result(column="activation_time", property="activationTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="bind_status", property="bindStatus", jdbcType=JdbcType.INTEGER),
         @Result(column="device_no", property="deviceNo", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time_utc", property="createTimeUtc", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="modify_time_utc", property="modifyTimeUtc", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="online_status", property="onlineStatus", jdbcType=JdbcType.INTEGER),
-        @Result(column="count", property="count", jdbcType=JdbcType.INTEGER)
+        @Result(column="freeze_status", property="freezeStatus", jdbcType=JdbcType.INTEGER)
     })
     List<LmRegistrationCode> selectByExample(LmRegistrationCodeExample example);
 
     @Select({
         "select",
         "id, card_type, status, expiration_time, remark, code, pro_type, activation_time, ",
-        "device_no, create_time_utc, modify_time_utc, online_status, count",
+        "bind_status, device_no, create_time_utc, modify_time_utc, freeze_status",
         "from lm_registration_code",
         "where id = #{id,jdbcType=VARCHAR}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
-        @Result(column="card_type", property="cardType", jdbcType=JdbcType.INTEGER),
+        @Result(column="card_type", property="cardType", jdbcType=JdbcType.VARCHAR),
         @Result(column="status", property="status", jdbcType=JdbcType.INTEGER),
         @Result(column="expiration_time", property="expirationTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="remark", property="remark", jdbcType=JdbcType.VARCHAR),
         @Result(column="code", property="code", jdbcType=JdbcType.VARCHAR),
-        @Result(column="pro_type", property="proType", jdbcType=JdbcType.INTEGER),
-        @Result(column="activation_time", property="activationTime", jdbcType=JdbcType.INTEGER),
+        @Result(column="pro_type", property="proType", jdbcType=JdbcType.VARCHAR),
+        @Result(column="activation_time", property="activationTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="bind_status", property="bindStatus", jdbcType=JdbcType.INTEGER),
         @Result(column="device_no", property="deviceNo", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time_utc", property="createTimeUtc", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="modify_time_utc", property="modifyTimeUtc", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="online_status", property="onlineStatus", jdbcType=JdbcType.INTEGER),
-        @Result(column="count", property="count", jdbcType=JdbcType.INTEGER)
+        @Result(column="freeze_status", property="freezeStatus", jdbcType=JdbcType.INTEGER)
     })
     LmRegistrationCode selectByPrimaryKey(String id);
 
@@ -101,18 +101,18 @@ public interface LmRegistrationCodeMapper {
 
     @Update({
         "update lm_registration_code",
-        "set card_type = #{cardType,jdbcType=INTEGER},",
+        "set card_type = #{cardType,jdbcType=VARCHAR},",
           "status = #{status,jdbcType=INTEGER},",
           "expiration_time = #{expirationTime,jdbcType=TIMESTAMP},",
           "remark = #{remark,jdbcType=VARCHAR},",
           "code = #{code,jdbcType=VARCHAR},",
-          "pro_type = #{proType,jdbcType=INTEGER},",
-          "activation_time = #{activationTime,jdbcType=INTEGER},",
+          "pro_type = #{proType,jdbcType=VARCHAR},",
+          "activation_time = #{activationTime,jdbcType=TIMESTAMP},",
+          "bind_status = #{bindStatus,jdbcType=INTEGER},",
           "device_no = #{deviceNo,jdbcType=VARCHAR},",
           "create_time_utc = #{createTimeUtc,jdbcType=TIMESTAMP},",
           "modify_time_utc = #{modifyTimeUtc,jdbcType=TIMESTAMP},",
-          "online_status = #{onlineStatus,jdbcType=INTEGER},",
-          "count = #{count,jdbcType=INTEGER}",
+          "freeze_status = #{freezeStatus,jdbcType=INTEGER}",
         "where id = #{id,jdbcType=VARCHAR}"
     })
     int updateByPrimaryKey(LmRegistrationCode record);

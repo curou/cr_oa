@@ -116,7 +116,7 @@
                             ,page: true //开启分页
                             ,cols: [[ //表头
                                 //表头
-                                {type: 'checkbox'}
+                                {type: 'checkbox',width: 50}
                                 , {field: 'proName', align: 'center', title: '产品名称', width: 130}
                                 , {field: 'productSpec', align: 'center', title: '规格', width: 200}
                                 , {field: 'unit', align: 'center', title: '产品单位', width: 130}
