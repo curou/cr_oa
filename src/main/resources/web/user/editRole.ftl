@@ -62,7 +62,6 @@
             async:false,
             contentType: "application/json",
             success: function (list) {
-                debugger;
                 var str = '';
                 for (var i = 0; i < list.length; i++) {
                     str += '<option value="' + list[i].id + '">' + list[i].name + '</option>';
@@ -78,11 +77,12 @@
         $("#roleId").val(parent.layui.$("#editRoleIdHidden").val());
         //id集合文本，如1，2，3
         var idStr = parent.layui.$("#editRolePermIdHidden").val();
-        // var str = parent.layui.$("#editRolePermHidden").val();
-        // var arr = str.split(",");
-        var idArr = idStr.split(",");
-        formSelects.render('perm');
-        formSelects.value('perm', idArr);
+        if(idStr!=null||idStr!=""){
+            var idArr = idStr.split(",");
+            formSelects.render('perm');
+            formSelects.value('perm', idArr);
+        }
+
 
         form.render();
 
@@ -93,9 +93,7 @@
         //监听搜索按钮
         form.on('submit(demo1)', function (data) {
             var arr = formSelects.value('perm', 'val');       //取值val数组
-            if(arr.length==0) {
-                layer.msg("请选择权限！")
-            }else{
+
                 var index = parent.layer.getFrameIndex(window.name);
                 var obj = new Array();
                 for (var i = 0; i < arr.length; i++) {
@@ -118,7 +116,7 @@
                         layer.msg(JSON.parse(data.responseText).message,{ icon: 1, time: 1000 });
                     }
                 });
-            }
+
 
         });
 

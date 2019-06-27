@@ -6,7 +6,6 @@
 <title>layout 后台大布局 - Layui</title>
 <link rel="stylesheet" href="/layui/css/layui.css"/>
 <link rel="stylesheet" href="/css/global.css"/>
-<link rel="stylesheet" href="/treetable-lay/treetable.css"/>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -37,6 +36,9 @@
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a id="user-edit">修改资料</a></dd>
+                        <dd><a id="user-edit">修改密码</a></dd>
+                        <hr>
+                        <dd><a id="user-edit">退出</a></dd>
                         <#--<dd><a href="">安全设置</a></dd>-->
                     </dl>
                 <#else>

@@ -28,11 +28,6 @@ public interface UserService {
 
     Boolean del(List<String> userIds) throws AjaxException;
 
-    List<User> searchUser(UserSearch search);
-
-    Boolean updStatus(UserDataReq userDataReq);
-
-    Boolean updRole(String id);
 
     User getByAccount(String account);
 

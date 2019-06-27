@@ -139,48 +139,9 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    @Override
-    public List<User> searchUser(UserSearch search) {
-        UserExample example = new UserExample();
-        UserExample.Criteria criteria = example.createCriteria();
-//        if (StringUtils.isNoneBlank(search.getUserName())){
-//            criteria.andNameLike("%"+search.getUserName()+"%");
-//        }
-//        if (StringUtils.isNoneBlank(search.getUserMobilePhone())){
-//            criteria.andMobilePhoneLike("%"+search.getUserMobilePhone()+"%");
-//        }
 
 
-        example.setOrderByClause("user_sort asc,user_update_time desc");
-        return mapper.selectByExample(example);
-    }
 
-    @Override
-    public Boolean updStatus(UserDataReq userDataReq) {
-        User user = new User();
-        BeanUtils.copyProperties(userDataReq,user);
-        try {
-            mapper.updateByPrimaryKeySelective(user);
-        }catch (Exception e){
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public Boolean updRole(String id) {
-        User user = mapper.selectByPrimaryKey(id);
-        if (user==null){
-            throw new AjaxException("用户不存在");
-        }
-//        user.setUserRole(null);
-        try {
-            mapper.updateByPrimaryKey(user);
-        }catch (Exception e){
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public User getByAccount(String account) {

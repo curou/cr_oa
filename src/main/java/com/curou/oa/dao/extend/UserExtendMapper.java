@@ -18,7 +18,7 @@ public interface UserExtendMapper extends UserMapper {
             @Result(column="account", property="account", jdbcType=JdbcType.VARCHAR),
             @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
             @Result(column="role", property="role", jdbcType=JdbcType.VARCHAR),
-            @Result(column="roleId", property="roleId", jdbcType=JdbcType.VARCHAR),
+            @Result(column="role_id", property="roleId", jdbcType=JdbcType.VARCHAR),
             @Result(column="department", property="department", jdbcType=JdbcType.VARCHAR),
             @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
             @Result(column="sex", property="sex", jdbcType=JdbcType.VARCHAR),

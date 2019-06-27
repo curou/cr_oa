@@ -64,13 +64,13 @@ public class LmRegistrationCodeController {
 
     //测试
     public static void main(String[] args) {
-        long time = 1558442572000l;
+        long time = 1560930512000l;
         time = ((time+5)*6-3)*4;
         Object obj = new SimpleHash("MD5", time+"", null, 1);
         String str = obj.toString();
         System.out.println(str);
 
-        int random = 10618;
+        int random = 10000;
         random = (random - 1993)*2+5;
         str += random;
         System.out.println(str);
@@ -78,11 +78,11 @@ public class LmRegistrationCodeController {
         String strTemp = temp.toString();
         System.out.println(strTemp);
 
-        String id = UUID.randomUUID().toString();
-        id = id.toLowerCase();
-        id = id.replaceAll("-","");
-        id = "GW"+id;
-        System.out.println(id);
+//        String id = UUID.randomUUID().toString();
+//        id = id.toLowerCase();
+//        id = id.replaceAll("-","");
+//        id = "GW"+id;
+//        System.out.println(id);
     }
 
     @RequestMapping("lmRegistrationCode/check")

@@ -47,9 +47,12 @@
 .layui-header .layui-nav .layui-nav-more {
     border-top-color: #333;
 }
+/*点击隐藏菜单按钮，下方颜色条隐藏*/
 .layui-nav .layui-this:after {
     width: 0%;
 }
+
+
 
 .layui-form-mid {
     padding: 0px 0!important;

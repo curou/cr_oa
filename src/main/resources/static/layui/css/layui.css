@@ -3605,10 +3605,10 @@ body .layui-table-tips .layui-layer-content {
     position: relative
 }
 
-.layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd.layui-this {
-    background-color: #5FB878;
-    color: #fff
-}
+/*.layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd.layui-this {*/
+/*    background-color: #5FB878;*/
+/*    color: #fff*/
+/*}*/
 
 .layui-nav-child dd.layui-this:after {
     display: none

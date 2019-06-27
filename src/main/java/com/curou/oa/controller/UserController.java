@@ -84,9 +84,9 @@ public class UserController {
     }
 
 
-    @PostMapping("/eidtUser")
+    @PostMapping("/editUser")
     @ResponseBody
-    public Map<String,String> eidtUser(@RequestBody UserDataReq userDataReq) {
+    public Map<String,String> editUser(@RequestBody UserDataReq userDataReq) {
         Map<String, String> map = new HashMap<>();
         Boolean check = userService.checkAccount(userDataReq);
         if (!check) {

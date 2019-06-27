@@ -131,62 +131,20 @@
         $("#userId").val(obj.id);
         $("#departmentId").val(obj.departmentId);
         var roleId = obj.roleId;
-        // var role = obj.role;
-        // var arr = role.split(",");
-        var idArr = roleId.split(",");
-        formSelects.render('role');
-        formSelects.value('role', idArr);
+        if(roleId!=null){
+            var idArr = roleId.split(",");
+            formSelects.render('role');
+            formSelects.value('role', idArr);
+        }
+
 
         form.render();
 
-        // //下拉框选中事件
-        // form.on('select(role)', function(data){
-        //     var id = data.value; //得到被选中的值
-        //     if(id!=null&&id!=""){
-        //
-        //         var str = $("#role").next().find("input").val();
-        //         if(equal("#demo",id)){
-        //             layer.msg("已经存在该角色！")
-        //         }else{
-        //             $("#tabDiv").css("display", "");
-        //             element.tabAdd('demo', {
-        //                 title: str //显示的文本
-        //                 ,id: id
-        //             })
-        //         }
-        //     }
-        //
-        //
-        // });
-        //
-        // //tab选项卡关闭完之后隐藏整个tab的div
-        // $(".layui-tab").on("click",function(e){
-        //     if($(e.target).is(".layui-tab-close")){
-        //         if($(".layui-tab-title").find("li").length==0){
-        //             $("#tabDiv").css("display", "none");
-        //         }
-        //     }
-        // })
-        //
-        // //遍历现在tab对比是否存在同样的值
-        // var equal = function(tabId,id){
-        //     var x = false;
-        //     $(tabId).find("li").each(function(){
-        //         var str = $(this).attr("lay-id");
-        //         if(str==id){
-        //             x = true;
-        //             return false;
-        //         }
-        //     })
-        //     return x;
-        // }
 
         //监听搜索按钮
         form.on('submit(demo1)', function (data) {
             var arr = formSelects.value('role', 'val');       //取值val数组
-            if (arr.length == 0) {
-                layer.msg("请选择权限！")
-            } else {
+
                 var index = parent.layer.getFrameIndex(window.name);
                 var obj = new Array();
                 for (var i = 0; i < arr.length; i++) {
@@ -197,7 +155,7 @@
                 // layer.msg(json);
                 $.ajax({
                     type: "POST",
-                    url: "user/eidtUser",
+                    url: "user/editUser",
                     data: json,
                     dataType: "json",
                     contentType: "application/json",
@@ -209,7 +167,7 @@
                         layer.msg(JSON.parse(data.responseText).message, {icon: 1, time: 1000});
                     }
                 });
-            }
+
 
         });
 
