@@ -35,6 +35,7 @@ public class LmRegistrationCodeController {
     public Map<String,String> add(@RequestBody LmRegistrationCodeReq lmRegistrationCode){
         Map<String, String> map = new HashMap<>();
         map.put("result", "success");
+
         service.add(lmRegistrationCode);
         return map;
     }
